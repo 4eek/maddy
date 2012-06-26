@@ -1,4 +1,18 @@
-# !! - Repeat the last command directed at hubot
+# Description:
+#   None
+#
+# Dependencies:
+#   None
+#
+# Configuration:
+#   None
+#
+# Commands:
+#   hubot !! - Repeat the last command directed at hubot
+#
+# Author:
+#   None
+
 module.exports = (robot) ->
   robot.respond /(.+)/i, (msg) ->
     store msg

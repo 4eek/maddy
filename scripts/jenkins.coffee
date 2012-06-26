@@ -1,19 +1,26 @@
-# Interact with your Jenkins CI server
+# Description:
+#   Interact with your Jenkins CI server
 #
-# You need to set the following variables:
-#   HUBOT_JENKINS_URL = "http://ci.example.com:8080"
+# Dependencies:
+#   None
 #
-# The following variables are optional
-#   HUBOT_JENKINS_AUTH: for authenticating the trigger request (user:password)
+# Configuration:
+#   HUBOT_JENKINS_URL
+#   HUBOT_JENKINS_AUTH
 #
-# jenkins build <job> - builds the specified Jenkins job
-# jenkins build <job> with <params> - builds the specified Jenkins job with parameters as key=value&key2=value2
-# jenkins list - lists Jenkins jobs
+# Commands:
+#   hubot jenkins build <job> - builds the specified Jenkins job
+#   hubot jenkins build <job>, <params> - builds the specified Jenkins job with parameters as key=value&key2=value2
+#   hubot jenkins list - lists Jenkins jobs
 #
+# Author:
+#   dougcole
+
+querystring = require 'querystring'
 
 jenkinsBuild = (msg) ->
     url = process.env.HUBOT_JENKINS_URL
-    job = msg.match[1]
+    job = querystring.escape msg.match[1]
     params = msg.match[3]
 
     path = if params then "#{url}/job/#{job}/buildWithParameters?#{params}" else "#{url}/job/#{job}/build"
@@ -57,7 +64,7 @@ jenkinsList = (msg) ->
             msg.send error
 
 module.exports = (robot) ->
-  robot.respond /jenkins build ([\w\.\-_]+)( with (.+))?/i, (msg) ->
+  robot.respond /jenkins build ([\w\.\-_ ]+)(, (.+))?/i, (msg) ->
     jenkinsBuild(msg)
 
   robot.respond /jenkins list/i, (msg) ->
