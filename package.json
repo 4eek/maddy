@@ -17,7 +17,27 @@
   "dependencies": {
     "hubot": "2.2.0",
     "hubot-scripts": ">=2.0.8",
-    "optparse": "1.0.3"
+    "optparse": "1.0.3",
+    "redis",
+    "jsdom",
+    "xml2js",
+    "soupselect",
+    "htmlparser",
+    "sprintf",
+    "wwwdude",
+    "pypi",
+    "underscore",
+    "underscore.string",
+    "cradle",
+    "clark",
+    "bang",
+    "shellwords",
+    "nodepie",
+    "mailer",
+    "scribe-node",
+    "sandbox",
+    "prowler"
+
   },
 
   "engines": {
