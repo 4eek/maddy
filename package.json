@@ -44,8 +44,7 @@
     "scraper": "0.0.9",
     "sandbox": "0.8.3",
     "handlebars": "1.0.5beta",
-    "date-utils": ">=1.2.5",
-    "hashlib": "1.0.1"
+    "date-utils": ">=1.2.5"
   },
 
   "engines": {
