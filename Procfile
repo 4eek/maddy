@@ -1,1 +1,1 @@
-app: bin/hubot -a campfire -n Maddy
+web: bin/hubot -a campfire -n Maddy
