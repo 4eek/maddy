@@ -2,7 +2,7 @@
 #   Display current app performance stats from New Relic
 #
 # Dependencies:
-#   None
+#   "xml2js": "0.2.0"
 #
 # Configuration:
 #   HUBOT_NEWRELIC_ACCOUNT_ID
@@ -34,7 +34,10 @@ module.exports = (robot) ->
         if err
           msg.send "New Relic says: #{err}"
           return
+
         (new Parser).parseString body, (err, json)->
-          for threshold_value in json['threshold_value']
-            msg.send "  #{threshold_value['@']['name']} : #{threshold_value['@']['formatted_metric_value']}"
-          msg.send "  https://rpm.newrelic.com/accounts/#{accountId}/applications/#{appId}"
+          threshold_values = json['threshold-values']['threshold_value'] || []
+          lines = threshold_values.map (threshold_value) ->
+            "#{threshold_value['$']['name']}: #{threshold_value['$']['formatted_metric_value']}"
+             
+          msg.send lines.join("\n"), "https://rpm.newrelic.com/accounts/#{accountId}/applications/#{appId}"

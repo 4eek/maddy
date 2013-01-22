@@ -124,6 +124,11 @@ views =
       {{sender.login}} commented on issue {{issue.number}} on {{repo_name}} "{{{overflow issue.title 25}}}" {{issue.html_url}}
       > {{{overflow comment.body 120}}}
     """
+  commit_comment:
+    """
+    {{sender.login}} commented on commit {{comment.commit_id}} on {{repo_name}} {{comment.html_url}}
+    > {{{overflow comment.body 120}}}
+    """
   pull_request: (context) ->
     template = switch context.action
       when 'opened'
@@ -188,11 +193,11 @@ module.exports = (robot) ->
     robot.brain.data.octospy ||= {}
 
   # Public: Announce the kinds of things octospy knows about
-  robot.respond /octospy events/, (msg) ->
+  robot.respond /octospy events/i, (msg) ->
     msg.reply "I know about " + ( event for event of views ).join(', ')
 
   # Public: Dump the watching hash
-  robot.respond /octospying/, (msg) ->
+  robot.respond /octospying/i, (msg) ->
     watching = []
 
     # Troll octospy's data for any possible listeners, then see if they're us
@@ -221,7 +226,7 @@ module.exports = (robot) ->
   # repo       - The repository name (ex. 'github/hubot'
   # event      - The event type to stop watching (default: 'push')
   # github_url - The base github URL (default: 'github.com'
-  robot.respond /octospy stop ([^ ]+\/[^ ]+) ?([^ ]*)? ?([^ ]*)?/, (msg) ->
+  robot.respond /octospy stop ([^ ]+\/[^ ]+) ?([^ ]*)? ?([^ ]*)?/i, (msg) ->
     repo = msg.match[1]
     event = msg.match[2] || 'push'
     github_url = msg.match[3] || 'github.com'
@@ -273,7 +278,7 @@ module.exports = (robot) ->
   # repo       - The repository name (ex. 'github/hubot'
   # event      - The event type to stop watching (default: 'push')
   # github_url - The base github URL (default: 'github.com'
-  robot.respond /octospy ([^ ]+\/[^ ]+) ?([^ ]*)? ?([^ ]*)?/, (msg) ->
+  robot.respond /octospy ([^ ]+\/[^ ]+) ?([^ ]*)? ?([^ ]*)?/i, (msg) ->
     repo = msg.match[1]
     event = msg.match[2] || 'push'
     github_url = msg.match[3] || 'github.com'

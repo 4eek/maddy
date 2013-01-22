@@ -24,7 +24,7 @@
 #   cloudwatch:GetMetricStatistics, cloudwatch:Describe*, autoscaling:Describe*
 #
 # Author:
-#   Ethan J. Brown
+#   Iristyle
 
 key = process.env.HUBOT_AWS_ACCESS_KEY_ID
 secret = process.env.HUBOT_AWS_SECRET_ACCESS_KEY
@@ -98,8 +98,8 @@ getRegionInstances = (region, msg) ->
           arch = instance.architecture
           devType = instance.rootDeviceType
 
-          tags = _.flatten [instance.tagSet.item]
-          name = (_.find tags, (t) -> t.key == 'Name').value
+          tags = _.flatten [instance.tagSet?.item ? []]
+          name = (_.find tags, (t) -> t.key == 'Name')?.value ? 'missing'
 
           msg.send "#{prefix} [#{state}] - #{name} / #{type} [#{devType} #{arch}] / #{dnsName} / #{region} / #{id} - started #{launchTime} #{suffix}"
 
@@ -161,7 +161,7 @@ getRegionQueues = (region, msg) ->
 
           msg.send "#{queueDesc} / oldest msg ~[#{timestamp}] / #{url}"
 
-defaultRegions = 'us-east-1,us-west-1,us-west-2,eu-west-1,ap-southeast-1,ap-northeast-1'
+defaultRegions = 'us-east-1,us-west-1,us-west-2,eu-west-1,ap-southeast-1,ap-northeast-1,sa-east-1'
 
 module.exports = (robot) ->
   robot.respond /(^|\W)sqs status(\z|\W|$)/i, (msg) ->

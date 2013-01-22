@@ -11,19 +11,21 @@
 #   HUBOT_GITHUB_USER
 #   HUBOT_GITHUB_REPO
 #   HUBOT_GITHUB_USER_(.*)
+#   HUBOT_GITHUB_API
 #
 # Commands:
-#   If HUBOT_GITHUB_USER is set, you can ask `show me issues for hubot` instead
-#   of `show me issues for github/hubot`.
+#   hubot show [me] [<limit> [of]] [<assignee>'s|my] [<label>] issues [for <user/repo>] [about <query>] -- Shows open GitHub issues for repo.
+#   hubot show [me] issues for <repo> -- List all issues for given repo IFF HUBOT_GITHUB_USER configured
+#   hubot show [me] issues for <user/repo> -- List all issues for given repo
+#   hubot show [me] issues -- Lists all issues IFF HUBOT_GITHUB_REPO configured
+#   hubot show <chat user's> issues -- Lists all issues for chat user IFF HUBOT_GITHUB_USER_(.*) configured
 #
-#   If HUBOT_GITHUB_REPO is set, you can ask `show me issues` instead of `show
-#   me issues for github/hubot`.
-#
+# Notes:
 #   If, for example, HUBOT_GITHUB_USER_JOHN is set to GitHub user login
 #   'johndoe1', you can ask `show john's issues` instead of `show johndoe1's
 #   issues`. This is useful for mapping chat handles to GitHub logins.
 #
-#   hubot show [me] [<limit> [of]] [<assignee>'s|my] [<label>] issues [for <user/repo>] [about <query>] -- Shows open GitHub issues for repo.
+#   HUBOT_GITHUB_API allows you to set a custom URL path (for Github enterprise users)
 #
 # Author:
 #   davidsiegel
@@ -82,7 +84,8 @@ module.exports = (robot) ->
     query_params.labels = criteria.label if criteria.label?
     query_params.assignee = criteria.assignee if criteria.assignee?
 
-    github.get "https://api.github.com/repos/#{criteria.repo}/issues", query_params, (issues) ->
+    base_url = process.env.HUBOT_GITHUB_API || 'https://api.github.com'
+    github.get "#{base_url}/repos/#{criteria.repo}/issues", query_params, (issues) ->
       issues = filter_issues issues, criteria
 
       if _.isEmpty issues
