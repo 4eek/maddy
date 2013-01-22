@@ -1,8 +1,8 @@
 {
-  "name":        "hosted-hubot",
-  "version":     "2.2.0",
-  "author":      "GitHub Inc.",
-  "keywords":    "github hubot campfire bot",
+  "name":        "hubot",
+  "version":     "2.4.5",
+  "author":      "hubot",
+  "keywords":    ["github","hubot","campfire","bot"],
   "description": "A simple helpful Robot for your Company",
   "licenses":     [{
     "type":       "MIT",
@@ -15,42 +15,22 @@
   },
 
   "dependencies": {
-    "hubot": "",
-    "hubot-scripts": "",
-    "optparse": "",
-    "redis": "",
-    "jsdom": "",
-    "xml2js": "",
-    "soupselect": "",
-    "htmlparser": "",
-    "sprintf": "",
-    "wwwdude": "",
-    "pypi": "",
-    "underscore": "",
-    "underscore.string": "",
-    "cradle": "",
-    "clark": "",
-    "bang": "",
-    "shellwords": "",
-    "nodepie": "",
-    "mailer": "",
-    "scribe-node": "",
-    "sandbox": "",
-    "prowler": "",
-    "githubot": "",
-    "node-xmpp": "",
-    "moment": "",
-    "cheerio": "",
-    "scraper": "",
-    "sandbox": "",
-    "handlebars": "",
-    "date-utils": "",
-    "aws2js": ""
+    "coffee-script": "~> 1.4.0",
+    "optparse": "1.0.3",
+    "scoped-http-client": "0.9.7",
+    "log": "1.3.0",
+    "connect": "2.3.4",
+    "connect_router": "1.8.6"
   },
 
   "engines": {
-    "node": "0.6.x",
-    "npm": "1.0.x"
+    "node": ">= 0.8.x",
+    "npm": "1.1.x"
+  },
+
+  "main": "./index",
+
+  "bin": {
+    "hubot": "./bin/hubot"
   }
 }
-
