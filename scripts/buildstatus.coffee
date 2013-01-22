@@ -34,7 +34,7 @@ success_images = [
 ]
 
 module.exports = (robot) ->
-  robot.hear /: FAILURE (/i, (msg) ->
+  robot.hear /FAILURE/i, (msg) ->
     msg.send msg.random failure_images
-  robot.hear /: SUCCESS (/i, (msg) ->
+  robot.hear /SUCCESS/i, (msg) ->
     msg.send msg.random success_images
