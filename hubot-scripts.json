@@ -1,1 +1,14 @@
-["redis-brain.coffee", "tweet.coffee", "shipit.coffee", "buildstatus.coffee", "do-it-live.coffee", "xkcd.coffee", "likeaboss.coffee", "web.coffee"]
+["redis-brain.coffee", 
+"tweet.coffee", 
+"shipit.coffee", 
+"buildstatus.coffee", 
+"do-it-live.coffee", 
+"xkcd.coffee", 
+"likeaboss.coffee", 
+"9gag.coffee", 
+"applause.coffee", 
+"goooood.coffee", 
+"hackernews.coffee", 
+"hangout.coffee", 
+"http-info.coffee", 
+"web.coffee"]
