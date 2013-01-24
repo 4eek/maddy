@@ -19,7 +19,10 @@
     "hubot-scripts": ">=2.0.8",
     "optparse": "1.0.3",
     "soupselect": "",
-    "nodepie": ""
+    "nodepie": "",
+    "jsdom": "",
+    "htmlparser": ""
+
   },
 
   "engines": {
